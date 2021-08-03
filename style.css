@@ -8,3 +8,12 @@ h2 {
 body {
   text-align: center;
 }
+.game-button {
+  text-align: center;
+  margin: auto;  
+}
+/*
+#gamebutton {
+  text-align:center;
+}
+*/
