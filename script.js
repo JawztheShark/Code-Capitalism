@@ -42,7 +42,20 @@ function render() {
     counterDisplayElem.style.display = "block";
     counterDisplayElem.innerHTML = "Lines of code " + Math.round(game.code);
   }
-  if (game.code >= 10) {
+  if (game.code == 10) {
+    document.getElementById('thirdPrompt').style.display = "none"
+    document.getElementById('helloWorldProject').style.display = "block"
+    document.getElementById('listSort').style.display = "block"
+    document.getElementById('helloWorldProject').onclick = function (e) {
+      document.getElementById('helloWorldProject').style.display = "none"
+      game.code ++;
+      document.getElementById('helloWorldDone').style.display = "block"
+    };
+  }
+  if (game.code >= 40) {
+    
+  }
+  if (game.code >= 100) {
     document.getElementById("autoincrement").style.display = "block";
   }
 };
