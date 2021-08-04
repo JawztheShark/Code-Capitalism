@@ -8,8 +8,26 @@
   </head>
   <body>
     <h1 id="page-title">Code Capitalism</h1>
+    <!-- do you want to learn to code prompt-->
+    <div id="firstPrompt">Do you want to learn to code?
+      <br>
+    <button type="button" id="Yes">Yes</button>
+    <!--makes a no button that linked to my little pony wiki -->
+    <form action="https://en.wikipedia.org/wiki/My_Little_Pony">
+      <input type="submit" value="No"/> 
+    </form>
+    </div>
+    <!-- second promt-->
+    <div id="secondPrompt" style="display:none"> This game is about coding, it's not going to actually teach you to code
+      <br>
+    <button type="button" id="duh">Well, duh</button>
+    <button type="button" id="duhTwo">I'm not an idiot</button>
+      </div>
+      <div id="thirdPrompt" style="display:none">Your first project is "Hello world"
+        </div>
     <!-- button to increase lines of code-->
-    <input type="button" class="game-button" value="Code" id ="increment"/>
+    <br>
+    <input type="button" class="game-button" value="Code" id ="increment" style="display:none"/>
     <!--counter that displays lines of code -->
     <h2 class="counter-display" style="display:none">Lines of code (..)</h2>
     <!-- button to add autocoders-->

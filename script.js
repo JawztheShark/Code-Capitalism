@@ -11,6 +11,24 @@ document.getElementById('increment').onclick = function (e) {
   game.code += 1;
 };
 
+//narative makes div go away when press yes
+document.getElementById('Yes').onclick = function (e) {
+  document.getElementById('firstPrompt').style.display = "none";
+  document.getElementById('secondPrompt').style.display = "block";
+};
+document.getElementById('duh').onclick = function (e) {
+  document.getElementById('secondPrompt').style.display = "none"
+  document.getElementById('duh').style.display = "none"
+  document.getElementById('thirdPrompt').style.display = "block";
+  document.getElementById('increment').style.display = "block"
+}
+document.getElementById('duhTwo').onclick = function (e) {
+  document.getElementById('secondPrompt').style.display = "none"
+  document.getElementById('duh').style.display = "none"
+  document.getElementById('thirdPrompt').style.display = "block";
+  document.getElementById('increment').style.display = "block"
+}
+
 // render the current game state
 function render() {
   //adds autocoders and displays number of autocoders
