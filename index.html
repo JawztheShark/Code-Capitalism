@@ -40,6 +40,14 @@
             <br>
             Lines of code needed to complete: 30 (40 total)
             </div>
+            <div id="listSortAfter" style="display:none">
+            Code failed to run, looks like it has a bug. press here to debug the program
+            <br>
+            <button type="button" id="fixBug">Debug</button>
+            </div>
+          <div id="listSortDone" style="display:none">
+            <button type="button" id="listSortRun">Run</button>
+            </div>
     <!-- button to increase lines of code-->
     <br>
     <input type="button" class="game-button" value="Code" id ="increment" style="display:none"/>
@@ -49,6 +57,7 @@
     <input type="button" class="game-button" value="Automate code" id ="autoincrement" style="display:none;"/>
     <!-- displays number of autocoders-->
     <h2 class="auto-display" style="display:none";>(..)</h2>
+    <h2 class="bug-display" style="display:none";>Bugs (..)</h2>
     <script src="script.js"></script>
   </body>
 </html>
