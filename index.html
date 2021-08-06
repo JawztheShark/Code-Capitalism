@@ -9,7 +9,7 @@
   <body>
     <h1 id="page-title">Code Capitalism</h1>
     <!-- do you want to learn to code prompt-->
-    <div id="firstPrompt">Do you want to learn to code?
+    <div style ="display:none" id="firstPrompt">Do you want to learn to code?
       <br>
     <button type="button" id="Yes">Yes</button>
     <!--makes a no button that linked to my little pony wiki -->
@@ -43,11 +43,21 @@
             <div id="listSortAfter" style="display:none">
             Code failed to run, looks like it has a bug. press here to debug the program
             <br>
+            </div>
+                        <!-- bug squash-->
+            <div id="debuggedListSort" style="display:none">
+              You squashed the bug, coding will generate bugs, make sure you squash them before running a project
+            </div>
+            <div id="fixBugDiv" style="display:none">
             <button type="button" id="fixBug">Debug</button>
             </div>
           <div id="listSortDone" style="display:none">
             <button type="button" id="listSortRun">Run</button>
             </div>
+          <div id="listSortDoneBugless" style="display:none">
+            <button type="button" id="listSortRunBugless">Run</button>
+          </div>
+
     <!-- button to increase lines of code-->
     <br>
     <input type="button" class="game-button" value="Code" id ="increment" style="display:none"/>
