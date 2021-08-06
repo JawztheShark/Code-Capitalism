@@ -21,7 +21,7 @@ document.getElementById('increment').onclick = function (e) {
   game.code += 1;
   //make 40
   if (game.code > 3) {
-  game.bugs += Math.round(Math.random())
+  game.bugs += Math.round(Math.random() - .4);
 }
 };
 //narative makes div go away when press yes do you want to learn to code
