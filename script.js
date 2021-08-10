@@ -10,7 +10,8 @@ let narative = {
   helloWorld: 0,
   sortList: 0,
   bug: 0,
-  stringLength: 0
+  stringLength: 0,
+  stringLengthAfter: 0
 }
 // add an autocoder
 document.getElementById('autoincrement').onclick = function (e) {
@@ -59,7 +60,16 @@ document.getElementById('listSortRun').onclick = function (e) {
     document.getElementById('fixBug').onclick = function (e) {
       game.bugs--;
     }
-
+    //the string length run button
+    document.getElementById('stringLengthRun').onclick = function (e) {
+      narative.stringLength = 0;
+      document.getElementById('stringLengthRun').style.display = "none";
+      narative.stringLengthAfter = 1;
+    }
+    //the begone bugs button
+    document.getElementById('LessBugsPress').onclick = function (e) {
+      
+    }
 
 // render the current game state
 function render() {
@@ -118,6 +128,16 @@ function render() {
     document.getElementById('debuggedListSort').style.display = "none"
     document.getElementById('listSortDoneBugless').style.display = "none"
     document.getElementById("increment").disabled = false;
+    document.getElementById('stringLength').style.display = "block"
+  } else {
+    document.getElementById('stringLength').style.display = "none"
+  }
+  if (narative.stringLengthAfter == 1) {
+    document.getElementById('lessBugs').style.display = "block"
+    document.getElementById('lessBugsButton').style.display = "block"
+  } else {
+    document.getElementById('lessBugs').style.display = "none"
+    document.getElementById('lessBugsButton').style.display = "none"
   }
   //adds autocoders and displays number of autocoders
   if (game.autocoders > 0) {
@@ -140,6 +160,11 @@ function render() {
   if (game.code == 3) {
     document.getElementById("increment").disabled = true;
     document.getElementById('listSortDone').style.display = "block"
+  }
+  //put to 90
+  if (game.code == 5 && game.bugs == 0) {
+    document.getElementById("increment").disabled = true;
+    document.getElementById('stringLengthDone').style.display = "block"
   }
   if (game.code >= 1000) {
     document.getElementById("autoincrement").style.display = "block";
@@ -169,6 +194,6 @@ window.setInterval(tick, 50);
 
 
 
-  // , , find value, reverse list, find length of a string, modifying arrays, loops, nesting loops, recursion, match strings, reverse strings, titel case strings
+  // , , find value, reverse list, find length of a string, modifying arrays, loops, nesting loops, recursion, match strings, reverse strings, title case strings
 
 

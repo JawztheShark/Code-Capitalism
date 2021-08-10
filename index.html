@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <h1 id="page-title">Code Capitalism</h1>
-    <!-- do you want to learn to code prompt-->
-    <div style ="display:none" id="firstPrompt">Do you want to learn to code?
-      <br>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>repl.it</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<h1 id="page-title">Code Capitalism</h1>
+	<!-- do you want to learn to code prompt-->
+	<div style="display:none" id="firstPrompt">Do you want to learn to code?
+		<br>
     <button type="button" id="Yes">Yes</button>
     <!--makes a no button that linked to my little pony wiki -->
     <form action="https://en.wikipedia.org/wiki/My_Little_Pony">
@@ -48,6 +50,16 @@
             <div id="debuggedListSort" style="display:none">
               You squashed the bug, coding will generate bugs, make sure you squash them before running a project
             </div>
+            <div id="stringLength" style="display:none">
+              Fine the length of a given string <br> lines of code: 50
+              </div>
+              <div id="lessBugs" style="display:none">
+                Congratulations, you have learned how to generate less bugs <br>
+                Click here to apply your newfound skill
+                <div id="lessBugsButton" style="display:none">
+            <button type="button" id="LessBugsPress">Begone Bugs</button>
+            </div>
+                </div>
             <div id="fixBugDiv" style="display:none">
             <button type="button" id="fixBug">Debug</button>
             </div>
@@ -57,6 +69,9 @@
           <div id="listSortDoneBugless" style="display:none">
             <button type="button" id="listSortRunBugless">Run</button>
           </div>
+          <div id="stringLengthDone" style="display:none">
+            <button type="button" id="stringLengthRun">Run</button>
+            </div>
 
     <!-- button to increase lines of code-->
     <br>
