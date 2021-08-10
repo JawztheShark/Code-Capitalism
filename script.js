@@ -9,6 +9,7 @@ let narative = {
   learn2: 0,
   helloWorld: 0,
   sortList: 0,
+  bugCode: 0,
   bug: 0,
   stringLength: 0,
   stringLengthAfter: 0
@@ -21,9 +22,12 @@ document.getElementById('autoincrement').onclick = function (e) {
 document.getElementById('increment').onclick = function (e) {
   game.code += 1;
   //make 40
-  if (game.code > 3) {
-  game.bugs += Math.round(Math.random() - .4);
-}
+  if (narative.bugCode == 1) {
+    game.bugs += Math.round(Math.random() - .4);
+  }
+  if (narative.bugCode == 2) {
+    game.bugs += Math.round(Math.random() - .45);
+  }
 };
 //narative makes div go away when press yes do you want to learn to code
 document.getElementById('Yes').onclick = function (e) {
@@ -50,6 +54,7 @@ document.getElementById('listSortRun').onclick = function (e) {
       narative.sortList = 1;
       narative.helloWorld = 0;
       narative.bug = 1;
+      narative.bugCode = 1;
     }
     document.getElementById('listSortRunBugless').onclick = function (e) {
       narative.sortList = 0;
@@ -68,7 +73,10 @@ document.getElementById('listSortRun').onclick = function (e) {
     }
     //the begone bugs button
     document.getElementById('LessBugsPress').onclick = function (e) {
-      
+      narative.bugCode = 2;
+      narative.stringLengthAfter = 0;
+      narative.sortList = 0;
+      document.getElementById("increment").disabled = false;
     }
 
 // render the current game state
