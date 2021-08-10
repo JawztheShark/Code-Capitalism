@@ -77,6 +77,7 @@ document.getElementById('listSortRun').onclick = function (e) {
       narative.stringLengthAfter = 0;
       narative.sortList = 0;
       document.getElementById("increment").disabled = false;
+      game.code++;
     }
 
 // render the current game state
