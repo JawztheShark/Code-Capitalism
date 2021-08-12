@@ -1,8 +1,42 @@
+
+const dialogs = {
+  "start": {
+    "text": "Do you want to learn to code?",
+    "buttons": [
+      {
+        "text": "Yes",
+        "action": "setDialogState('second')"
+      },{
+        "text": "No",
+        "action": "navigate('https://en.wikipedia.org/wiki/My_Little_Pony')"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {}
+  },
+  "second": {
+    "text": "This game is about coding, it's not going to actually teach you to code",
+    "buttons": [
+      {
+        "text": "Yes",
+        "action": "setDialogState('second')"
+      },{
+        "text": "No",
+        "action": "navigate('https://en.wikipedia.org/wiki/My_Little_Pony')"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {}
+  }
+};
+
 let game = {
+  dialogState: undefined,
   code: 0,
   autocoders: 0,
   bugs: 0
 };
+
 let narative = {
   firstPrompt: 1,
   learn: 0,
@@ -14,6 +48,37 @@ let narative = {
   stringLength: 0,
   stringLengthAfter: 0
 }
+
+function display(dialog) {
+  let cur = dialogs[dialog];
+
+  let buttons = "";
+  for (button of cur["buttons"]) {
+    buttons += `<button type="button" onclick="${button["action"]}">${button["text"]}</button>`
+  }
+  document.getElementById("dialog").innerHTML = 
+  `<dialog open>${cur["text"]}<br>${buttons}`;
+
+}
+
+function navigate(url) {
+  window.location.href = url;
+}
+
+function setDialogState(dialog) {
+  if (game.dialogState) {
+    dialogs[game.dialogState]["onend"]()
+  }
+  if (dialog) {
+    display(dialog)
+    dialogs[dialog]["onbegin"]()
+  }
+  game.dialogState = dialog;
+}
+
+setDialogState("start")
+
+/*
 // add an autocoder
 document.getElementById('autoincrement').onclick = function (e) {
   game.autocoders += 1;
@@ -47,38 +112,38 @@ document.getElementById('helloWorldProject').onclick = function (e) {
   game.code++;
   narative.learn2 = 0;
   narative.helloWorld = 1;
-    };
+};
 //prints stuff when you press run on list sort
 document.getElementById('listSortRun').onclick = function (e) {
-      game.bugs++;
-      narative.sortList = 1;
-      narative.helloWorld = 0;
-      narative.bug = 1;
-      narative.bugCode = 1;
-    }
-    document.getElementById('listSortRunBugless').onclick = function (e) {
-      narative.sortList = 0;
-      narative.stringLength = 1;
-      game.code++;
-    }
-    //the debug button
-    document.getElementById('fixBug').onclick = function (e) {
-      game.bugs--;
-    }
-    //the string length run button
-    document.getElementById('stringLengthRun').onclick = function (e) {
-      narative.stringLength = 0;
-      document.getElementById('stringLengthRun').style.display = "none";
-      narative.stringLengthAfter = 1;
-    }
-    //the begone bugs button
-    document.getElementById('LessBugsPress').onclick = function (e) {
-      narative.bugCode = 2;
-      narative.stringLengthAfter = 0;
-      narative.sortList = 0;
-      document.getElementById("increment").disabled = false;
-      game.code++;
-    }
+  game.bugs++;
+  narative.sortList = 1;
+  narative.helloWorld = 0;
+  narative.bug = 1;
+  narative.bugCode = 1;
+}
+document.getElementById('listSortRunBugless').onclick = function (e) {
+  narative.sortList = 0;
+  narative.stringLength = 1;
+  game.code++;
+}
+//the debug button
+document.getElementById('fixBug').onclick = function (e) {
+  game.bugs--;
+}
+//the string length run button
+document.getElementById('stringLengthRun').onclick = function (e) {
+  narative.stringLength = 0;
+  document.getElementById('stringLengthRun').style.display = "none";
+  narative.stringLengthAfter = 1;
+}
+//the begone bugs button
+document.getElementById('LessBugsPress').onclick = function (e) {
+  narative.bugCode = 2;
+  narative.stringLengthAfter = 0;
+  narative.sortList = 0;
+  document.getElementById("increment").disabled = false;
+  game.code++;
+}
 
 // render the current game state
 function render() {
@@ -89,7 +154,7 @@ function render() {
     document.getElementById('firstPrompt').style.display = "none";
   }
   if (narative.learn == 1) {
-  document.getElementById('secondPrompt').style.display = "block";
+    document.getElementById('secondPrompt').style.display = "block";
   } else {
     document.getElementById('secondPrompt').style.display = "none"
   }
@@ -100,19 +165,19 @@ function render() {
     document.getElementById('thirdPrompt').style.display = "none";
   }
   if (narative.helloWorld == 1) {
-      document.getElementById('listSort').style.display = "block"
-      document.getElementById('helloWorldDone').style.display = "block"
-      document.getElementById('helloWorldProject').style.display = "none"
-      document.getElementById("increment").disabled = false;
+    document.getElementById('listSort').style.display = "block"
+    document.getElementById('helloWorldDone').style.display = "block"
+    document.getElementById('helloWorldProject').style.display = "none"
+    document.getElementById("increment").disabled = false;
   } else {
     document.getElementById('helloWorldDone').style.display = "none"
   }
   if (narative.sortList == 1) {
     document.getElementById('listSort').style.display = "none"
-      document.getElementById('listSortDone').style.display = "none"
-      document.getElementById('listSortAfter').style.display = "block"
-      document.getElementById("listSortRun").disabled = true;
-  } 
+    document.getElementById('listSortDone').style.display = "none"
+    document.getElementById('listSortAfter').style.display = "block"
+    document.getElementById("listSortRun").disabled = true;
+  }
   if (narative.sortList == 1 && game.bugs == 0) {
     document.getElementById("listSortRun").disabled = false;
     document.getElementById('listSortAfter').style.display = "none"
@@ -125,8 +190,8 @@ function render() {
   if (narative.bug == 1) {
     document.getElementById('fixBugDiv').style.display = "block"
     let counterDisplayBugs = document.querySelector('.bug-display');
-      counterDisplayBugs.style.display = "block";
-      counterDisplayBugs.innerHTML = "Bugs: " + Math.round(game.bugs);
+    counterDisplayBugs.style.display = "block";
+    counterDisplayBugs.innerHTML = "Bugs: " + Math.round(game.bugs);
   }
   if (game.bugs == 0) {
     document.getElementById("fixBug").disabled = true;
@@ -205,4 +270,4 @@ window.setInterval(tick, 50);
 
   // , , find value, reverse list, find length of a string, modifying arrays, loops, nesting loops, recursion, match strings, reverse strings, title case strings
 
-
+*/

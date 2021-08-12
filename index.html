@@ -10,105 +10,10 @@
 
 <body>
 	<h1 id="page-title">Code Capitalism</h1>
-	<!-- do you want to learn to code prompt-->
-	<div style="display:none" id="firstPrompt">
-    <dialog open> Do you want to learn to code? 
-		<br>
-    <button type="button" id="Yes">Yes</button>
-    <!--makes a no button that linked to my little pony wiki -->
-    <form action="https://en.wikipedia.org/wiki/My_Little_Pony">
-      <input type="submit" value="No"/> 
-    </form>
-    </dialog>
-    </div>
-    <!-- second promt-->
-    <div id="secondPrompt" style="display:none"> 
-      <dialog open>This game is about coding, it's not going to actually teach you to code
-      <br>
-    <button type="button" id="duh">Well, duh</button>
-    <button type="button" id="duhTwo">I'm not an idiot</button>
-    </dialog>
-      </div>
-      <div id="thirdPrompt" style="display:none">
-        <dialog open>Your first project is "Hello world"
-        <br>
-        Lines of code needed to complete: 10
-        </dialog>
-        </div>
-        <div id="helloWorldProject" style="display:none">
-          <dialog open> "Hello world" Project complete
-          <br>
-          <button type="button" id="helloWorldProject">Run</button> 
-          </dialog>
-          </div>
-        <div id ="helloWorldDone" style="display:none"> 
-          <dialog open>"Hello world" Good job
-          <br>
-          <br>
-          </dialog>
-          </div>
-          <div id="listSort" style="display:none">
-            <dialog open>
-            Project: sort a list
-            <br>
-            Lines of code needed to complete: 30 (40 total)
-            <div id="listSortDone" style="display:none">
-            <button type="button" id="listSortRun">Run</button>
-            </div>
-            </dialog>
-            </div>
-            <div id="listSortAfter" style="display:none">
-              <dialog open>
-            Code failed to run, looks like it has a bug. press the debug button to debug the program
-            </dialog>
-            <br>
-            </div>
-                        <!-- bug squash-->
-            <div id="debuggedListSort" style="display:none">
-              <dialog open>
-              You squashed the bug, coding will generate bugs, make sure you squash them before running a project
-              <div id="listSortDoneBugless" style="display:none">
-            <button type="button" id="listSortRunBugless">Run</button>
-          </div>
-              </dialog>
-            </div>
-            <div id="stringLength" style="display:none">
-              <dialog open>
-              Find the length of a given string <br> lines of code: 50
-              <div id="stringLengthDone" style="display:none">
-            <button type="button" id="stringLengthRun">Run</button>
-            </div>
-              </dialog>
-              </div>
-              <div id="lessBugs" style="display:none">
-                <dialog open>
-                Congratulations, you have learned how to generate less bugs <br>
-                Click here to apply your newfound skill
-                <div id="lessBugsButton" style="display:none">
-            <button type="button" id="LessBugsPress">Begone Bugs</button>
-            </dialog>
-            </div>
-                </div>
-          
+  <div id="dialog">foo</div>
 
-    <!-- button to increase lines of code-->
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <input type="button" class="game-button" value="Code" id ="increment" style="display:none"/>
-    <div id="fixBugDiv" style="display:none">
-      <button type="button" id="fixBug">Debug</button>
-    </div>
-    <!--counter that displays lines of code -->
-    <h2 class="counter-display" style="display:none">Lines of code (..)</h2>
-    <!-- button to add autocoders-->
-    <input type="button" class="game-button" value="Automate code" id ="autoincrement" style="display:none;"/>
-    <!-- displays number of autocoders-->
-    <h2 class="auto-display" style="display:none";>(..)</h2>
-    <h2 class="bug-display" style="display:none";>Bugs (..)</h2>
+</body>
     <script src="script.js"></script>
-  </body>
+
+
 </html>
