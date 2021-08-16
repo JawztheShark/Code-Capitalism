@@ -19,6 +19,38 @@ the next project takes 10 lines, but as you're coding there's some bugs you don'
 the next project you get a linter, and some of the bugs become visible as you make them
 
 
+## Phase 1 concepts unlock schedule
+
+Each gameplay conect is unlocked via a project.  At the start of the project, a dialog box will explain the concept
+
+### Writing code - first project
+**dialog**: "Each project requires you to write code to complete it.  You're going to write a simple program to print "hello world" to the screen, by clicking the [code] button"
+
+**effect**: Unlocks the code button and the lines of code counter.
+
+### Syntax Bugs - second project
+**dialog**: "As you write code, sometimes you can mispell keywords or variables, and this will prevent the proper execution of your code"
+
+**effect**: unlocks the syntax bugs counter, unlocks the fix syntax bugs button (note that syntax bugs are not visible until you try to run the project, and you find them one at a time)
+
+
+### Linter - third project
+**dialog**: "A linter will read your code looking for syntax bugs, list them for you"
+
+**effect**: unlocks the lint button (the lint button can be clicked any time and will find all of the syntax bugs immediately)
+
+### Linter - third project
+**dialog**: "Sometimes your code contains errors that cause compuational errors"
+
+**effect**: unlocks the logic bugs counter and the print debugging button (note that logic bugs are not visible until you try to run the project, and you find them one at a time)
+
+### Unit tests - fourth project
+**dialog**: "You can write tests that will execute parts of your code, and compare the observed behavior to the expected behavior"
+
+**effect**: unlocks the write unit test button, and unlocks the run tests button (each unit test has a 50% chance of finding a bug when the run tests button is pressed. any logic bug not found by tests will still be found (one at a time) when you run the code)
+
+
+
 Phase 1 gameplay loop:
 
 1. select project

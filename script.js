@@ -18,16 +18,94 @@ const dialogs = {
     "text": "This game is about coding, it's not going to actually teach you to code",
     "buttons": [
       {
-        "text": "Yes",
-        "action": "setDialogState('second')"
+        "text": "Well, duh",
+        "action": "setDialogState('third')"
       },{
-        "text": "No",
-        "action": "navigate('https://en.wikipedia.org/wiki/My_Little_Pony')"
+        "text": "I'm not an idiot",
+        "action": "setDialogState('third')"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {}
+  },
+  "third": {
+    "text": "Each project requires you to write code to complete it.  You're going to write a simple program to print 'hello world' to the screen, by clicking the [code] button",
+    "buttons": [
+      {
+        "text": "Code",
+        "action": "game.code += 1, render();"
+      }
+    ],
+    "onbegin": () => {narative.codeCounter = 1, narative.firstProject = 1},
+    "onend": () => {}
+  },
+  "thirdRun": {
+    "text": "You have written enough lines of code, press Run to run your project",
+    "buttons": [
+      {
+        "text": "Run",
+        "action": "setDialogState('fourth');"
+      }
+    ],
+    "onbegin": () => {narative.firstProject = 0},
+    "onend": () => {game.code = 0, render()}
+  },
+  "fourth": {
+    "text": "You have completed the project, this uses up the lines of code you have written and unlocks new abilities",
+    "buttons": [
+      {
+        "text": "Continue",
+        "action": "setDialogState('fifth');"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {}
+  },
+  "fifth": {
+    "text": "Your next project is to sort a list",
+    "buttons": [
+      {
+        "text": "Code",
+        "action": "game.code += 1, render();"
+      }
+    ],
+    "onbegin": () => {narative.secondProject = 1},
+    "onend": () => {}
+  },
+  "fifthb": {
+    "text": "As you write code, sometimes you can mispell keywords or variables, and this will prevent the proper execution of your code",
+    "buttons": [
+      {
+        "text": "Code",
+        "action": "game.code += 1, render();"
+      }
+    ],
+    "onbegin": () => {narative.secondProject = 0, narative.secondProjectRun = 1},
+    "onend": () => {}
+  },
+  "fifthRun": {
+    "text": "Run the code to finish the project",
+    "buttons": [
+      {
+        "text": "Run",
+        "action": "setDialogState('sixth');"
+      }
+    ],
+    "onbegin": () => {narative.secondProjectRun = 0},
+    "onend": () => {}
+  },
+  "sixth": {
+    "text": "This will tell you about any bugs in your code when you try to run it",
+    "buttons": [
+      {
+        "text": "Run",
+        "action": "setDialogState('sixth');"
       }
     ],
     "onbegin": () => {},
     "onend": () => {}
   }
+
 };
 
 let game = {
@@ -38,6 +116,10 @@ let game = {
 };
 
 let narative = {
+  codeCounter: 0,
+  firstProject: 0,
+  secondProject: 0,
+  secondProjectRun: 0,
   firstPrompt: 1,
   learn: 0,
   learn2: 0,
@@ -75,7 +157,26 @@ function setDialogState(dialog) {
   }
   game.dialogState = dialog;
 }
+function render() {
+  if (narative.codeCounter == 1) {
+    let counterDisplayElem = document.querySelector('.counter-display');
+    counterDisplayElem.style.display = "block";
+    counterDisplayElem.innerHTML = "Lines of code " + Math.round(game.code);
+  }
+  if (game.code == 2 && narative.firstProject == 1) {
+    setDialogState("thirdRun")
+  }
+  if (game.code == 5 && narative.secondProject == 1) {
+    setDialogState("fifthb")
+  }
+  if (game.code == 10 && narative.secondProjectRun == 1) {
+    setDialogState("fifthRun")
+  }
+}
 
+function run() {
+
+}
 setDialogState("start")
 
 /*
@@ -83,7 +184,7 @@ setDialogState("start")
 document.getElementById('autoincrement').onclick = function (e) {
   game.autocoders += 1;
 };
-// add a line of code
+//add a line of code
 document.getElementById('increment').onclick = function (e) {
   game.code += 1;
   //make 40
