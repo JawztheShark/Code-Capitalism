@@ -32,12 +32,12 @@ const dialogs = {
     "text": "Each project requires you to write code to complete it.  You're going to write a simple program to print 'hello world' to the screen, by clicking the [code] button",
     "buttons": [
       {
-        "text": "Code",
-        "action": "game.code += 1, render();"
+        "text": "Continue",
+        "action": "setDialogState(null)"
       }
     ],
-    "onbegin": () => {narative.codeCounter = 1, narative.firstProject = 1},
-    "onend": () => {}
+    "onbegin": () => {narative.firstProject = 1},
+    "onend": () => {modal.style.display = 'none', narative.codeCounter = 1}
   },
   "thirdRun": {
     "text": "You have written enough lines of code, press Run to run your project",
@@ -65,54 +65,75 @@ const dialogs = {
     "text": "Your next project is to sort a list",
     "buttons": [
       {
-        "text": "Code",
-        "action": "game.code += 1, render();"
+        "text": "Continue",
+        "action": "setDialogState(null)"
       }
     ],
     "onbegin": () => {narative.secondProject = 1},
-    "onend": () => {}
+    "onend": () => {modal.style.display = 'none'}
   },
   "fifthb": {
-    "text": "As you write code, sometimes you can mispell keywords or variables, and this will prevent the proper execution of your code",
+    "text": "As you write code, sometimes you can mispell keywords or variables, and this will prevent the proper execution of your code, this is called a syntax bug",
     "buttons": [
       {
-        "text": "Code",
-        "action": "game.code += 1, render();"
+        "text": "Continue",
+        "action": "setDialogState(null)"
       }
     ],
     "onbegin": () => {narative.secondProject = 0, narative.secondProjectRun = 1},
-    "onend": () => {}
+    "onend": () => {modal.style.display = 'none', game.syntaxBugs++}
   },
   "fifthRun": {
     "text": "Run the code to finish the project",
     "buttons": [
       {
         "text": "Run",
-        "action": "setDialogState('sixth');"
+        "action": "run()"
       }
     ],
     "onbegin": () => {narative.secondProjectRun = 0},
     "onend": () => {}
   },
   "sixth": {
-    "text": "This will tell you about any bugs in your code when you try to run it",
+    "text": "Oh no, you have a syntax bug, these are found when you try to run your code",
     "buttons": [
       {
-        "text": "Run",
-        "action": "setDialogState('sixth');"
+        "text": "continue",
+        "action": "setDialogState(syntaxBugs);"
+      }
+    ],
+    "onbegin": () => {narative.bugCode == 1},
+    "onend": () => {}
+  },
+  "syntaxBugs": {
+    "text": "Click here to fix a syntax bug",
+    "buttons": [
+      {
+        "text": "Fix syntax bug",
+        "action": "debug();"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {}
+  },
+  "seven": {
+    "text": "you have successfully run the code",
+    "buttons": [
+      {
+        "text": "continue",
+        "action": "setDialogState(null);"
       }
     ],
     "onbegin": () => {},
     "onend": () => {}
   }
-
 };
 
 let game = {
   dialogState: undefined,
   code: 0,
   autocoders: 0,
-  bugs: 0
+  syntaxBugs: 0
 };
 
 let narative = {
@@ -159,25 +180,54 @@ function setDialogState(dialog) {
 }
 function render() {
   if (narative.codeCounter == 1) {
+    document.getElementById('increment').style.display = "block";
     let counterDisplayElem = document.querySelector('.counter-display');
     counterDisplayElem.style.display = "block";
     counterDisplayElem.innerHTML = "Lines of code " + Math.round(game.code);
   }
   if (game.code == 2 && narative.firstProject == 1) {
+    modal.style.display = 'block'
     setDialogState("thirdRun")
   }
   if (game.code == 5 && narative.secondProject == 1) {
+    modal.style.display = 'block'
     setDialogState("fifthb")
   }
   if (game.code == 10 && narative.secondProjectRun == 1) {
+    modal.style.display = 'block'
     setDialogState("fifthRun")
   }
 }
 
 function run() {
-
+  if (game.syntaxBugs > 0) {
+    setDialogState("syntaxBugs")
+  }
+  if (game.syntaxBugs == 0) {
+    setDialogState("seven")
+    game.code = 0;
+  }
 }
+//code button
+document.getElementById('increment').onclick = function (e) {
+  game.code += 1;
+  if (narative.bugCode == 1) {
+    game.syntaxBugs += Math.round(Math.random() - .4);
+  }
+}
+//the debug button
+function debug() {
+  game.syntaxBugs--;
+  setDialogState("fifthRun")
+}
+function tick() {
+  game.code += game.autocoders / 20;
+  render();
+}
+// call the game loop 20 times a second
+window.setInterval(tick, 50);
 setDialogState("start")
+
 
 /*
 // add an autocoder
@@ -347,7 +397,7 @@ function render() {
 };
 
 
-// exeute the main game loop
+// exeute the main game loop copied
 function tick() {
   game.code += game.autocoders / 20;
   render();

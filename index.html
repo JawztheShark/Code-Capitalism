@@ -10,7 +10,11 @@
 
 <body>
 	<h1 id="page-title">Code Capitalism</h1>
+  <div id="modal" class="modal">
+    <div class="modal-content">
   <div id="dialog"></div>
+  </div>
+  </div>
   <br>
   <br>
   <br>
@@ -19,7 +23,12 @@
   <br>
   <br>
   <br>
+  <input type="button" class="game-button" value="Code" id ="increment" style="display:none"/>
   <h2 class="counter-display" style="display:none">Lines of code (..)</h2>
+  <div id="fixBugDiv" style="display:none">
+      <button type="button" id="fixBug">Debug</button>
+    </div>
+    <h2 class="bug-display" style="display:none";>Bugs (..)</h2>
 </body>
 
     <script src="script.js"></script>
