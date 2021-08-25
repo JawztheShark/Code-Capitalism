@@ -81,7 +81,7 @@ const dialogs = {
       }
     ],
     "onbegin": () => {narative.secondProject = 0, narative.secondProjectRun = 1},
-    "onend": () => {modal.style.display = 'none', game.syntaxBugs++}
+    "onend": () => {modal.style.display = 'none', game.syntaxBugs++, narative.firstSyntaxBug = 1}
   },
   "fifthRun": {
     "text": "Run the code to finish the project",
@@ -99,10 +99,10 @@ const dialogs = {
     "buttons": [
       {
         "text": "continue",
-        "action": "setDialogState(syntaxBugs);"
+        "action": "setDialogState('syntaxBugs');"
       }
     ],
-    "onbegin": () => {narative.bugCode == 1},
+    "onbegin": () => {narative.bugCode = 1, narative.firstSyntaxBug = 0},
     "onend": () => {}
   },
   "syntaxBugs": {
@@ -125,8 +125,20 @@ const dialogs = {
       }
     ],
     "onbegin": () => {},
-    "onend": () => {}
-  }
+    "onend": () => {modal.style.display = 'none'}
+  },
+  "eigth": {
+    "text": "Your next project is to make a linter. A linter will read your code looking for syntax bugs and list them for you",
+    "buttons": [
+      {
+        "text": "continue",
+        "action": "setDialogState(null);"
+      }
+    ],
+    "onbegin": () => {},
+    "onend": () => {modal.style.display = 'none'}
+  },
+
 };
 
 let game = {
@@ -142,6 +154,7 @@ let narative = {
   secondProject: 0,
   secondProjectRun: 0,
   firstPrompt: 1,
+  firstSyntaxBug: 0,
   learn: 0,
   learn2: 0,
   helloWorld: 0,
@@ -200,12 +213,16 @@ function render() {
 }
 
 function run() {
+  if (narative.firstSyntaxBug == 1) {
+    setDialogState("sixth")
+  } else {
   if (game.syntaxBugs > 0) {
     setDialogState("syntaxBugs")
   }
   if (game.syntaxBugs == 0) {
     setDialogState("seven")
     game.code = 0;
+  }
   }
 }
 //code button
